@@ -1,0 +1,85 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3>Dashboard de Análise de Vendas</h3>
+            </div>
+            <div class="card-body">
+                <p class="lead">Analise seus dados de vendas de forma rápida e visual.</p>
+                <a href="{% url 'dashboard:upload' %}" class="btn btn-primary btn-lg">
+                    <i class="bi bi-upload"></i> Fazer Upload de Dados de Vendas
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5>Arquivos Recentes</h5>
+            </div>
+            <div class="card-body">
+                {% if recent_files %}
+                    <div class="list-group list-group-flush">
+                        {% for file in recent_files %}
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold">{{ file.original_name }}</div>
+                                        <small class="text-muted">{{ file.uploaded_at|date:"d/m/Y H:i" }}</small>
+                                    </div>
+                                    {% if file.processed %}
+                                        <a href="{% url 'dashboard:analyze' file.id %}" class="btn btn-sm btn-outline-primary">
+                                            Ver Análise
+                                        </a>
+                                    {% else %}
+                                        <span class="badge bg-warning">Processando</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">Nenhum arquivo enviado ainda.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Como funciona?</h5>
+                <div class="row">
+                    <div class="col-md-4 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-upload" style="font-size: 2rem; color: #0d6efd;"></i>
+                        </div>
+                        <h6>1. Upload</h6>
+                        <p class="text-muted">Envie seu arquivo CSV com dados de vendas</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-graph-up" style="font-size: 2rem; color: #198754;"></i>
+                        </div>
+                        <h6>2. Análise</h6>
+                        <p class="text-muted">Processamos e analisamos automaticamente</p>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <div class="mb-3">
+                            <i class="bi bi-bar-chart" style="font-size: 2rem; color: #dc3545;"></i>
+                        </div>
+                        <h6>3. Resultados</h6>
+                        <p class="text-muted">Visualize gráficos e relatórios detalhados</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

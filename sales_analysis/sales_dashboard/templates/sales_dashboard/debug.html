@@ -1,0 +1,147 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-info">
+                <h4 class="alert-heading">
+                    <i class="fas fa-server"></i> 
+                    Interface Detectada: 
+                    <span class="badge {% if debug_info.interface == 'ASGI' %}bg-success{% else %}bg-warning{% endif %}">
+                        {{ debug_info.interface }}
+                    </span>
+                </h4>
+                <p class="mb-0">{{ debug_info.description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Event Loop Info -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">🔄 Event Loop</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Status:</strong> {{ debug_info.event_loop }}</p>
+                    {% if debug_info.loop_type %}
+                        <p><strong>Tipo:</strong> {{ debug_info.loop_type }}</p>
+                    {% endif %}
+                    {% if debug_info.error %}
+                        <p><strong>Erro:</strong> <code>{{ debug_info.error }}</code></p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Threading Info -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">🧵 Threading</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Thread Atual:</strong> {{ debug_info.thread_name }}</p>
+                    <p><strong>Thread ID:</strong> {{ debug_info.thread_id }}</p>
+                    <p><strong>Threads Ativas:</strong> {{ debug_info.active_threads }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Server Info -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">🖥️ Servidor</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Nome:</strong> {{ debug_info.server_name }}</p>
+                    <p><strong>Porta:</strong> {{ debug_info.server_port }}</p>
+                    <p><strong>Software:</strong> {{ debug_info.server_software }}</p>
+                    <p><strong>WSGI Version:</strong> {{ debug_info.wsgi_version }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Python Info -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">🐍 Python</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Versão:</strong></p>
+                    <code style="font-size: 0.8em;">{{ debug_info.python_version }}</code>
+                    <p class="mt-2"><strong>Asyncio Disponível:</strong> 
+                        {% if debug_info.asyncio_available %}
+                            <span class="badge bg-success">Sim</span>
+                        {% else %}  
+                            <span class="badge bg-danger">Não</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSON Raw Data -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">📋 Dados Brutos (JSON)</h5>
+                </div>
+                <div class="card-body">
+                    <pre><code>{{ debug_info|pprint }}</code></pre>
+                    <button class="btn btn-sm btn-outline-primary mt-2" onclick="copyToClipboard()">
+                        Copiar JSON
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instruções -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="alert alert-secondary">
+                <h6>Como testar diferentes interfaces:</h6>
+                <ul class="mb-0">
+                    <li><code>python manage.py runserver</code> - ASGI (padrão Django 3.1+)</li>
+                    <li><code>python manage.py runserver --force-wsgi</code> - WSGI forçado</li>
+                    <li><code>gunicorn sales_analysis.wsgi:application</code> - WSGI produção</li>
+                    <li><code>daphne sales_analysis.asgi:application</code> - ASGI produção</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a href="/" class="btn btn-primary">Voltar ao Dashboard</a>
+        <a href="/debug/json/" class="btn btn-info">Ver JSON Puro</a>
+    </div>
+</div>
+
+<script>
+function copyToClipboard() {
+    const jsonData = "{{ debug_info|safe }}";
+    navigator.clipboard.writeText(JSON.stringify(jsonData, null, 2))
+        .then(() => alert('JSON copiado para clipboard!'))
+        .catch(err => console.error('Erro ao copiar:', err));
+}
+</script>
+
+<style>
+pre {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+</style>
+{% endblock %}

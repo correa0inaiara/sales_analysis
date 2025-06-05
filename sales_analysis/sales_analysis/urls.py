@@ -15,13 +15,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from dashboard import views
+from django.shortcuts import render
+
+def home_view(request):
+    """Página inicial com opções de dashboards"""
+    return render(request, 'home.html')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.upload_file, name='upload'),
-    path('results/', views.analysis_results, name='results'),
+    path('', home_view, 'home.html'),
+
+    path('upload/', include('file_uploader.urls')),
+    path('sales/', include('sales_dashboard.urls')),
+    path('inventory/', include('inventory_dashboard.urls')),
+    # path('debug/', views.debug_interface_html, name='debug_html'),
+    # path('debug/json/', views.debug_interface, name='debug_json'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
