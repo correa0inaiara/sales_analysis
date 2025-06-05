@@ -1,0 +1,27 @@
+data,produto,categoria,quantidade,valor_unitario,valor_venda,desconto,regiao,vendedor,forma_pagamento,custo
+2023-01-01,Notebook,Eletrônicos,1,3500.00,3500.00,0.00,Sul,João Silva,Cartão de Crédito,2800.00
+2023-01-01,Smartphone,Eletrônicos,2,800.00,1500.00,100.00,Sudeste,Maria Souza,Pix,1200.00
+2023-01-02,Tablet,Eletrônicos,1,1300.00,1200.00,100.00,Nordeste,Carlos Oliveira,Boleto,900.00
+2023-01-02,Notebook,Eletrônicos,1,3400.00,3200.00,200.00,Sul,Ana Costa,Cartão de Débito,2720.00
+2023-01-03,Smartphone,Eletrônicos,3,500.00,1350.00,150.00,Norte,Pedro Santos,Cartão de Crédito,1050.00
+2023-01-03,Tablet,Eletrônicos,2,600.00,1100.00,100.00,Sudeste,Juliana Pereira,Pix,800.00
+2023-01-04,Notebook,Eletrônicos,2,3600.00,3400.00,200.00,Sudeste,João Silva,Cartão de Crédito,2720.00
+2023-01-04,Smartphone,Eletrônicos,1,1500.00,1400.00,100.00,Nordeste,Maria Souza,Boleto,1120.00
+2023-01-05,Mouse,Periféricos,5,80.00,350.00,50.00,Sul,Carlos Oliveira,Pix,200.00
+2023-01-05,Teclado,Periféricos,3,120.00,330.00,30.00,Sudeste,Ana Costa,Cartão de Débito,210.00
+2023-01-06,Monitor,Eletrônicos,1,1200.00,1100.00,100.00,Norte,Pedro Santos,Cartão de Crédito,880.00
+2023-01-06,Fone de Ouvido,Periféricos,4,150.00,520.00,80.00,Sudeste,Juliana Pereira,Pix,320.00
+2023-01-07,Notebook,Eletrônicos,1,3700.00,3500.00,200.00,Sul,João Silva,Boleto,2800.00
+2023-01-07,Smartphone,Eletrônicos,2,850.00,1600.00,100.00,Nordeste,Maria Souza,Cartão de Crédito,1280.00
+2023-01-08,Impressora,Eletrônicos,1,900.00,800.00,100.00,Sudeste,Carlos Oliveira,Pix,600.00
+2023-01-08,Webcam,Periféricos,3,200.00,550.00,50.00,Norte,Ana Costa,Cartão de Débito,360.00
+2023-01-09,HD Externo,Eletrônicos,2,400.00,750.00,50.00,Sul,Pedro Santos,Boleto,560.00
+2023-01-09,SSD,Eletrônicos,4,300.00,1100.00,100.00,Sudeste,Juliana Pereira,Cartão de Crédito,800.00
+2023-01-10,Notebook,Eletrônicos,1,3600.00,3400.00,200.00,Nordeste,João Silva,Pix,2720.00
+2023-01-10,Smartphone,Eletrônicos,3,550.00,1500.00,150.00,Sul,Maria Souza,Cartão de Débito,1200.00
+2023-01-11,Tablet,Eletrônicos,1,1250.00,1150.00,100.00,Sudeste,Carlos Oliveira,Cartão de Crédito,920.00
+2023-01-11,Notebook,Eletrônicos,2,3550.00,3300.00,200.00,Norte,Ana Costa,Boleto,2640.00
+2023-01-12,Smartphone,Eletrônicos,1,1600.00,1500.00,100.00,Sudeste,Pedro Santos,Pix,1200.00
+2023-01-12,Tablet,Eletrônicos,2,650.00,1200.00,100.00,Sul,Juliana Pereira,Cartão de Crédito,960.00
+2023-01-13,Notebook,Eletrônicos,1,3650.00,3450.00,200.00,Nordeste,João Silva,Cartão de Débito,2760.00
+2023-01-13,Smartphone,Eletrônicos,4,425.00,1550.00,150.00,Sudeste,Maria Souza,Boleto,1240.00
