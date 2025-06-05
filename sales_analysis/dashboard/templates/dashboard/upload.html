@@ -1,0 +1,32 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">Upload de Arquivo de Vendas</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="file" class="form-label">Selecione um arquivo CSV:</label>
+                <input class="form-control" type="file" name="file" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar e Analisar</button>
+        </form>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h4>Formato esperado do CSV:</h4>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>data</th>
+                <th>produto</th>
+                <th>quantidade</th>
+                <th>valor_venda</th>
+                <th>regiao</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+{% endblock %}

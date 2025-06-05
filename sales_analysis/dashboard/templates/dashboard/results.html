@@ -1,0 +1,73 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h2 class="card-title">Resultados da Análise - {{ file_name }}</h2>
+        
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total de Vendas</h5>
+                        <p class="display-6">{{ total_sales }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Média por Venda</h5>
+                        <p class="display-6">{{ avg_sale }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Vendas por Produto</h5>
+                <img src="data:image/png;base64,{{ chart1 }}" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Vendas por Região</h5>
+                <img src="data:image/png;base64,{{ chart2 }}" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Top 5 Produtos</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Total de Vendas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for produto, valor in top_products.items %}
+                <tr>
+                    <td>{{ produto }}</td>
+                    <td>R$ {{ valor|floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="mt-3">
+    <a href="/" class="btn btn-primary">Voltar e Analisar Outro Arquivo</a>
+</div>
+{% endblock %}
